@@ -3,10 +3,9 @@ from random import randint
 size = 5
 num_ships = 4
 
-# Other variables
-player_board = [[" [ ] " for x in range(size)] for x in range(size)]
-computer_board = [[" [ ] " for x in range(size)] for x in range(size)]
-
+# variables for boards
+player_board = [["[   ]" for x in range(size)] for x in range(size)]
+computer_board = [["[   ]" for x in range(size)] for x in range(size)]
 
 # Game logo and starting
 print("Welcome to the battleships game")
@@ -14,24 +13,30 @@ print(f"Board size: {size}, number of ship: {num_ships}")
 print("_" * 30)
 
 
-# Function to print the board that established
 def print_board(board):
+    """
+    Function to print a board.
+    """
     for row in board:
-      print(" ".join(row))
+        print(" ".join(row))
 
-# Function to randomly Add ships in the boards
+
 def add_ships(player_board, computer_board):
+    """
+    Function for Add ships randomly in each board.
+    """
     for _ in range(num_ships):
-      while True:
         user_ship_row = randint(0, size - 1)
         user_ship_col = randint(0, size - 1)
-        if player_board[user_ship_row][user_ship_col] == " [ ] ":
-            player_board[user_ship_row][user_ship_col] = " [p] "
-        computer_ship_row = randint(0, size - 1)
-        computer_ship_col = randint(0, size - 1)
-        if computer_board[computer_ship_row][computer_ship_col] == " [ ] ":
-            computer_board[computer_ship_row][computer_ship_col] = " [c] "
-            break
+        comp_ship_row = randint(0, size - 1)
+        comp_ship_col = randint(0, size - 1)
+        while True:
+            if player_board[user_ship_row][user_ship_col] == "[   ]":
+                player_board[user_ship_row][user_ship_col] = "[< >]"
+            elif computer_board[comp_ship_row][comp_ship_col] == "[   ]":
+                computer_board[comp_ship_row][comp_ship_col] = "[> <]"
+                break
+
 
 add_ships(player_board, computer_board)
 print("Player board:")
