@@ -30,12 +30,10 @@ def add_ships(player_board, computer_board):
         user_ship_col = randint(0, size - 1)
         comp_ship_row = randint(0, size - 1)
         comp_ship_col = randint(0, size - 1)
-        while True:
-            if player_board[user_ship_row][user_ship_col] == "[   ]":
-                player_board[user_ship_row][user_ship_col] = "[< >]"
-            elif computer_board[comp_ship_row][comp_ship_col] == "[   ]":
-                computer_board[comp_ship_row][comp_ship_col] = "[> <]"
-                break
+        if player_board[user_ship_row][user_ship_col] == "[   ]":
+            player_board[user_ship_row][user_ship_col] = "[< >]"
+        if computer_board[comp_ship_row][comp_ship_col] == "[   ]":
+            computer_board[comp_ship_row][comp_ship_col] = "[> <]"
 
 
 # Function to guess the locatation of computer's ships by the user
@@ -44,9 +42,28 @@ def user_guess():
     Function allows player start playing by guessing
     the row and col numbers on the computer board.
     """
-    row_guess = input("Guess Row:\n")
-    col_guess = input("Guess col:\n")
-    print(f"You guess: ({row_guess}, {col_guess})")
+    while True:
+        row_guess = input("Guess Row: <number within board size (0-4)> \n")
+        col_guess = input("Guess col: <number within board size (0-4)> \n")
+        if validate_data(row_guess, col_guess):
+            print("")
+            print(f"You guess: ({row_guess}, {col_guess})")
+            break
+
+
+def validate_data(row_guess, col_guess):
+    """
+    Inside try check if the inputs are no biger than 4
+    and other than integers.
+    """
+    try:
+        if int(row_guess) > size or int(col_guess) > size:
+            print(f"the number is out the limit of the board size {size}\n")
+            return False
+    except ValueError:
+        print("Invalid input, please enter a numerical values.\n")
+        return False
+    return True
 
 
 add_ships(player_board, computer_board)
