@@ -38,11 +38,23 @@ def add_ships(player_board, computer_board):
                 break
 
 
+# Function to guess the locatation of computer's ships by the user
+def user_guess():
+    """
+    Function allows player start playing by guessing
+    the row and col numbers on the computer board.
+    """
+    row_guess = input("Guess Row:\n")
+    col_guess = input("Guess col:\n")
+    print(f"You guess: ({row_guess}, {col_guess})")
+
+
 add_ships(player_board, computer_board)
 print("Player board:")
 print_board(player_board)
 print("Computer board:")
 print_board(computer_board)
+user_guess()
 # Create boards for each of participants
 # Function to validate the entered data by the player
 # Player guesses and turn to play
