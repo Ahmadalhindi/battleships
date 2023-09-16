@@ -46,8 +46,6 @@ def user_guess():
         row_guess = input("Guess Row: <number within board size (0-4)> \n")
         col_guess = input("Guess col: <number within board size (0-4)> \n")
         if validate_data(row_guess, col_guess):
-            print("")
-            print(f"You guess: ({row_guess}, {col_guess})")
             player_turn(row_guess, col_guess)
             break
 
@@ -75,13 +73,14 @@ def player_turn(row_guess, col_guess):
     """
     if computer_board[int(row_guess)][int(col_guess)] == "[> <]":
         computer_board[int(row_guess)][int(col_guess)] = "[<x>]"
-        print("You hit a ship")
-    elif computer_board[int(row_guess)][int(col_guess)] == "[<x>]":
-        print("You already guess this and hit one ship. Please try again")
-        return user_guess()
-    else:
+        print(f"You guess: ({row_guess}, {col_guess}), and hit a ship")
+    elif computer_board[int(row_guess)][int(col_guess)] == "[   ]":
         computer_board[int(row_guess)][int(col_guess)] = "[ x ]"
-        print("You miss")
+        print(f"You guess: ({row_guess}, {col_guess}), and miss a ship")
+    else:
+        print(f"You already guessed ({row_guess}, {col_guess}). Plz try again")
+        user_guess()
+    print_board(computer_board)
 
 
 add_ships(player_board, computer_board)
