@@ -83,6 +83,25 @@ def player_turn(row_guess, col_guess):
     print_board(computer_board)
 
 
+def computer_turn():
+    """
+    Check with feedback if the computer hit or miss the
+    target on player board,
+    return to function  if guess the same number again
+    """ 
+    comp_row_guess = randint(0, size - 1)
+    comp_col_guess = randint(0, size - 1)
+    if player_board[comp_row_guess][comp_col_guess] == "[< >]":
+        player_board[comp_row_guess][comp_col_guess] = "[<x>]"
+        print(f"Computer guesses: ({comp_row_guess},{comp_col_guess}) & hits")
+    elif player_board[comp_row_guess][comp_col_guess] == "[   ]":
+        player_board[comp_row_guess][comp_col_guess] = "[ x ]"
+        print(f"Computer guesses:({comp_row_guess},{comp_col_guess}) & misses")
+    else:
+        computer_turn()
+    print_board(player_board)
+
+
 add_ships(player_board, computer_board)
 print("Player board:")
 print_board(player_board)
