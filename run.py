@@ -48,6 +48,7 @@ def user_guess():
         if validate_data(row_guess, col_guess):
             print("")
             print(f"You guess: ({row_guess}, {col_guess})")
+            player_turn(row_guess, col_guess)
             break
 
 
@@ -66,12 +67,30 @@ def validate_data(row_guess, col_guess):
     return True
 
 
+def player_turn(row_guess, col_guess):
+    """
+    Check with feedback if the player hit or miss the
+    target on computer board,
+    return to guess again if guess the same number again
+    """
+    if computer_board[int(row_guess)][int(col_guess)] == "[> <]":
+        computer_board[int(row_guess)][int(col_guess)] = "[<x>]"
+        print("You hit a ship")
+    elif computer_board[int(row_guess)][int(col_guess)] == "[<x>]":
+        print("You already guess this and hit one ship. Please try again")
+        return user_guess()
+    else:
+        computer_board[int(row_guess)][int(col_guess)] = "[ x ]"
+        print("You miss")
+
+
 add_ships(player_board, computer_board)
 print("Player board:")
 print_board(player_board)
 print("Computer board:")
 print_board(computer_board)
 user_guess()
+
 # Create boards for each of participants
 # Function to validate the entered data by the player
 # Player guesses and turn to play
