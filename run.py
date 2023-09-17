@@ -3,15 +3,16 @@ from random import randint
 size = 5
 num_ships = 5
 rounds = 0
-max_round = 5
+max_round = 5  # Here you can adjust the max round.
 player_hit = []
 computer_hit = []
-
-# variables for boards
+# Variables for boards.
+# Get a hint to these variables from the course in project example.
 player_board = [["[   ]" for x in range(size)] for x in range(size)]
 computer_board = [["[   ]" for x in range(size)] for x in range(size)]
 
 
+# Get a hint to this function from the course in project example.
 def print_board(board):
     """
     Function to print a board.
@@ -25,7 +26,7 @@ def add_ships(player_board, computer_board):
     Function for Add ships randomly in each board.
     """
     for _ in range(num_ships):
-        # adding ships randomly for both boards.
+        # Adding ships randomly for both boards.
         user_ship_row = randint(0, size - 1)
         user_ship_col = randint(0, size - 1)
         comp_ship_row = randint(0, size - 1)
@@ -33,7 +34,7 @@ def add_ships(player_board, computer_board):
         if player_board[user_ship_row][user_ship_col] == "[   ]":
             player_board[user_ship_row][user_ship_col] = "[< >]"
         if computer_board[comp_ship_row][comp_ship_col] == "[   ]":
-            computer_board[comp_ship_row][comp_ship_col] = "[> <]"
+            computer_board[comp_ship_row][comp_ship_col] = "]   ["
 
 
 # Function to guess the locatation of computer's ships by the user
@@ -43,22 +44,23 @@ def user_guess():
     the row and col numbers on the computer board.
     """
     while True:
-        # variables let user to guess the row and col in computer board
-        row_guess = input("Guess Row: <number within board size (0-4)> \n")
-        col_guess = input("Guess col: <number within board size (0-4)> \n")
+        # Variables allow user to guess the row and col in computer board.
+        row_guess = input("Guess Row? <number within board size (0-4)> \n")
+        col_guess = input("Guess col? <number within board size (0-4)> \n")
         if validate_data(row_guess, col_guess):
             player_turn(row_guess, col_guess)
             break
 
 
+# Get a hint to this function from Love Sandwiches Walkthrough Project.
 def validate_data(row_guess, col_guess):
     """
-    Inside try check if the inputs are no biger than 4
-    and other than integers.
+    Inside try check if the inputs are numbers and limited to
+    the board size.
     """
     try:
         if int(row_guess) > size or int(col_guess) > size:
-            print(f"the number is out the limit of the board size {size}\n")
+            print(f"The number is out the limit of the board size {size}\n")
             return False
     except ValueError:
         print("Invalid input, please enter a numerical values.\n")
@@ -77,7 +79,7 @@ def player_turn(row_guess, col_guess):
     player hit list.
     """
     global player_score
-    if computer_board[int(row_guess)][int(col_guess)] == "[> <]":
+    if computer_board[int(row_guess)][int(col_guess)] == "]   [":
         computer_board[int(row_guess)][int(col_guess)] = "[<x>]"
         print(f"You guessed: ({row_guess}, {col_guess}), and hit")
         player_hit.append(1)
@@ -134,23 +136,28 @@ def continue_game(rounds):
         print_board(computer_board)
         print("Player board:")
         print_board(player_board)
-        if rounds <= max_round:
-            next_round = str(input("Would you like to continue playing? (y, n)\n"))     
-            if next_round == 'y':
-                continue_game(rounds)
-            elif next_round == 'n':
-                print("Thanks for playing.")
+        print("_" * 30)
+        while True:
+            if rounds <= (max_round-1):
+                next_round = str(input("Will you continue playing?(y, n)\n"))
+                if next_round == 'y':
+                    continue_game(rounds)
+                    return False
+                elif next_round == 'n':
+                    print("Thanks for playing.")
+                    return False
+                else:
+                    print("Please answer by y or n.")
             else:
-                print("Please answer by y or n.")
-                return next_round
-        else:
-            print("Game reached the last round.")
-            if sum(player_hit) > sum(computer_hit):
-                print("Congratulation you win")
-            elif sum(computer_hit) > sum(player_hit):
-                print("Computer win")
-            else:
-                print("It's a tie")
+                print("*" * 30)
+                print(f"Game reached the last round: ({max_round})")
+                if sum(player_hit) > sum(computer_hit):
+                    print("Congratulation you win.")
+                elif sum(computer_hit) > sum(player_hit):
+                    print("Computer win.")
+                else:
+                    print("Game result: it's a tie.")
+                break
         break
 
 
@@ -161,9 +168,12 @@ def play_game():
     Print the user and computer boards after adding
     ships randomly for both.
     """
+    print("*" * 40)
     print("Welcome to the battleships game")
     print(f"Board size: {size}, number of ship: {num_ships}")
-    print("_" * 30)
+    print(f"Rounds number: {max_round}, result on last round")
+    print("Hit a ship: [<x>], missed a ship: [ x ]")
+    print("*" * 40)
     add_ships(player_board, computer_board)
     print("Computer board:")
     print_board(computer_board)
@@ -173,4 +183,5 @@ def play_game():
     continue_game(rounds)
 
 
-play_game()
+def main():
+    play_game()
