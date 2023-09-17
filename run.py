@@ -1,3 +1,4 @@
+from art import logo
 from random import randint
 # Constant variables
 size = 5
@@ -85,7 +86,7 @@ def player_turn(row_guess, col_guess):
         player_hit.append(1)
         player_score = sum(player_hit)
         print(f"Your score for this round is: ({player_hit[0]})")
-        print(f"Your total score is: {player_score}")
+        print(f"Your total score is: ({player_score})")
     elif computer_board[int(row_guess)][int(col_guess)] == "[   ]":
         computer_board[int(row_guess)][int(col_guess)] = "[ x ]"
         print(f"You guessed: ({row_guess}, {col_guess}), and missed")
@@ -114,7 +115,7 @@ def computer_turn():
         computer_hit.append(1)
         computer_score = sum(computer_hit)
         print(f"Computer score for this round is: ({computer_hit[0]})")
-        print(f"Computer total score is: {computer_score}")
+        print(f"Computer total score is: ({computer_score})")
     elif player_board[comp_row_guess][comp_col_guess] == "[   ]":
         player_board[comp_row_guess][comp_col_guess] = "[ x ]"
         print(f"Computer guessed:({comp_row_guess},{comp_col_guess}) & missed")
@@ -168,6 +169,8 @@ def play_game():
     Print the user and computer boards after adding
     ships randomly for both.
     """
+    # Logo; wavy by Brian Krog.
+    print(logo)
     print("*" * 40)
     print("Welcome to the battleships game")
     print(f"Board size: {size}, number of ship: {num_ships}")
@@ -185,3 +188,6 @@ def play_game():
 
 def main():
     play_game()
+
+
+main()
