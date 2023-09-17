@@ -2,6 +2,8 @@ from random import randint
 # Constant variables
 size = 5
 num_ships = 5
+rounds = 0
+max_round = 5
 player_hit = []
 computer_hit = []
 
@@ -74,6 +76,7 @@ def player_turn(row_guess, col_guess):
     Display a total score for evey hit to the target in the
     player hit list.
     """
+    global player_score
     if computer_board[int(row_guess)][int(col_guess)] == "[> <]":
         computer_board[int(row_guess)][int(col_guess)] = "[<x>]"
         print(f"You guessed: ({row_guess}, {col_guess}), and hit")
@@ -100,6 +103,7 @@ def computer_turn():
     display a total score for evey hit to the target in the
     computer hit list
     """
+    global computer_score
     comp_row_guess = randint(0, size - 1)
     comp_col_guess = randint(0, size - 1)
     if player_board[comp_row_guess][comp_col_guess] == "[< >]":
@@ -116,25 +120,38 @@ def computer_turn():
         computer_turn()
 
 
-def continue_game():
+def continue_game(rounds):
     """
     continue playing the game from the user guess function
     untill the request if the user wish to end th game.
     """
-    user_guess()
-    print("")
-    print("Computer board:")
-    print_board(computer_board)
-    print("Player board:")
-    print_board(player_board)
-    next_round = str(input("Would you like to continue playing? (y, n)\n"))
-    if next_round == 'y':
-        continue_game()
-    elif next_round == 'n':
-        print("Thanks for playing.")
-    else:
-        print("Please answer by y or n.")
-        return next_round
+    while True:
+        rounds += 1
+        print(f"Round ({rounds})")
+        user_guess()
+        print("")
+        print("Computer board:")
+        print_board(computer_board)
+        print("Player board:")
+        print_board(player_board)
+        if rounds <= max_round:
+            next_round = str(input("Would you like to continue playing? (y, n)\n"))     
+            if next_round == 'y':
+                continue_game(rounds)
+            elif next_round == 'n':
+                print("Thanks for playing.")
+            else:
+                print("Please answer by y or n.")
+                return next_round
+        else:
+            print("Game reached the last round.")
+            if sum(player_hit) > sum(computer_hit):
+                print("Congratulation you win")
+            elif sum(computer_hit) > sum(player_hit):
+                print("Computer win")
+            else:
+                print("It's a tie")
+        break
 
 
 def play_game():
@@ -153,7 +170,7 @@ def play_game():
     print("Player board:")
     print_board(player_board)
     print("_" * 30)
-    continue_game()
+    continue_game(rounds)
 
 
 play_game()
