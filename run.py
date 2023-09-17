@@ -9,11 +9,6 @@ computer_hit = []
 player_board = [["[   ]" for x in range(size)] for x in range(size)]
 computer_board = [["[   ]" for x in range(size)] for x in range(size)]
 
-# Game logo and starting
-print("Welcome to the battleships game")
-print(f"Board size: {size}, number of ship: {num_ships}")
-print("_" * 30)
-
 
 def print_board(board):
     """
@@ -28,6 +23,7 @@ def add_ships(player_board, computer_board):
     Function for Add ships randomly in each board.
     """
     for _ in range(num_ships):
+        # adding ships randomly for both boards.
         user_ship_row = randint(0, size - 1)
         user_ship_col = randint(0, size - 1)
         comp_ship_row = randint(0, size - 1)
@@ -45,6 +41,7 @@ def user_guess():
     the row and col numbers on the computer board.
     """
     while True:
+        # variables let user to guess the row and col in computer board
         row_guess = input("Guess Row: <number within board size (0-4)> \n")
         col_guess = input("Guess col: <number within board size (0-4)> \n")
         if validate_data(row_guess, col_guess):
@@ -70,8 +67,12 @@ def validate_data(row_guess, col_guess):
 def player_turn(row_guess, col_guess):
     """
     Check with feedback if the player hit or miss the
-    target on computer board,
-    return to guess again if guess the same number again
+    target on computer board.
+
+    Return to guess again if guess the same number again.
+
+    Display a total score for evey hit to the target in the
+    player hit list.
     """
     if computer_board[int(row_guess)][int(col_guess)] == "[> <]":
         computer_board[int(row_guess)][int(col_guess)] = "[<x>]"
@@ -92,8 +93,12 @@ def player_turn(row_guess, col_guess):
 def computer_turn():
     """
     Check with feedback if the computer hit or miss the
-    target on player board,
-    return to function  if guess the same number again
+    target on player board.
+
+    Return to function again if computer guess the same number again
+
+    display a total score for evey hit to the target in the
+    computer hit list
     """
     comp_row_guess = randint(0, size - 1)
     comp_col_guess = randint(0, size - 1)
@@ -111,14 +116,44 @@ def computer_turn():
         computer_turn()
 
 
-add_ships(player_board, computer_board)
-print("Computer board:")
-print_board(computer_board)
-print("Player board:")
-print_board(player_board)
-user_guess()
-print("")
-print("Computer board:")
-print_board(computer_board)
-print("Player board:")
-print_board(player_board)
+def continue_game():
+    """
+    continue playing the game from the user guess function
+    untill the request if the user wish to end th game.
+    """
+    user_guess()
+    print("")
+    print("Computer board:")
+    print_board(computer_board)
+    print("Player board:")
+    print_board(player_board)
+    next_round = str(input("Would you like to continue playing? (y, n)\n"))
+    if next_round == 'y':
+        continue_game()
+    elif next_round == 'n':
+        print("Thanks for playing.")
+    else:
+        print("Please answer by y or n.")
+        return next_round
+
+
+def play_game():
+    """
+    Start the game by welcoming with instructions.
+
+    Print the user and computer boards after adding
+    ships randomly for both.
+    """
+    print("Welcome to the battleships game")
+    print(f"Board size: {size}, number of ship: {num_ships}")
+    print("_" * 30)
+    add_ships(player_board, computer_board)
+    print("Computer board:")
+    print_board(computer_board)
+    print("Player board:")
+    print_board(player_board)
+    print("_" * 30)
+    continue_game()
+
+
+play_game()
