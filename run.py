@@ -1,7 +1,9 @@
 from random import randint
 # Constant variables
 size = 5
-num_ships = 4
+num_ships = 5
+player_hit = []
+computer_hit = []
 
 # variables for boards
 player_board = [["[   ]" for x in range(size)] for x in range(size)]
@@ -73,14 +75,18 @@ def player_turn(row_guess, col_guess):
     """
     if computer_board[int(row_guess)][int(col_guess)] == "[> <]":
         computer_board[int(row_guess)][int(col_guess)] = "[<x>]"
-        print(f"You guess: ({row_guess}, {col_guess}), and hit a ship")
+        print(f"You guessed: ({row_guess}, {col_guess}), and hit")
+        player_hit.append(1)
+        player_score = sum(player_hit)
+        print(f"Your score for this round is: ({player_hit[0]})")
+        print(f"Your total score is: {player_score}")
     elif computer_board[int(row_guess)][int(col_guess)] == "[   ]":
         computer_board[int(row_guess)][int(col_guess)] = "[ x ]"
-        print(f"You guess: ({row_guess}, {col_guess}), and miss a ship")
+        print(f"You guessed: ({row_guess}, {col_guess}), and missed")
     else:
         print(f"You already guessed ({row_guess}, {col_guess}). Plz try again")
         user_guess()
-    print_board(computer_board)
+    computer_turn()
 
 
 def computer_turn():
@@ -88,31 +94,31 @@ def computer_turn():
     Check with feedback if the computer hit or miss the
     target on player board,
     return to function  if guess the same number again
-    """ 
+    """
     comp_row_guess = randint(0, size - 1)
     comp_col_guess = randint(0, size - 1)
     if player_board[comp_row_guess][comp_col_guess] == "[< >]":
         player_board[comp_row_guess][comp_col_guess] = "[<x>]"
-        print(f"Computer guesses: ({comp_row_guess},{comp_col_guess}) & hits")
+        print(f"Computer guessed: ({comp_row_guess},{comp_col_guess}) & hit")
+        computer_hit.append(1)
+        computer_score = sum(computer_hit)
+        print(f"Computer score for this round is: ({computer_hit[0]})")
+        print(f"Computer total score is: {computer_score}")
     elif player_board[comp_row_guess][comp_col_guess] == "[   ]":
         player_board[comp_row_guess][comp_col_guess] = "[ x ]"
-        print(f"Computer guesses:({comp_row_guess},{comp_col_guess}) & misses")
+        print(f"Computer guessed:({comp_row_guess},{comp_col_guess}) & missed")
     else:
         computer_turn()
-    print_board(player_board)
 
 
 add_ships(player_board, computer_board)
-print("Player board:")
-print_board(player_board)
 print("Computer board:")
 print_board(computer_board)
+print("Player board:")
+print_board(player_board)
 user_guess()
-
-# Create boards for each of participants
-# Function to validate the entered data by the player
-# Player guesses and turn to play
-# Computer turn to play
-# Check for scores for each
-# Check for the last winner
-# Hints
+print("")
+print("Computer board:")
+print_board(computer_board)
+print("Player board:")
+print_board(player_board)
