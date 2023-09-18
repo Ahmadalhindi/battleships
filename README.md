@@ -54,7 +54,7 @@ User will guess the location of computer ships using input with validate data.
 
 ![result](readme-files/result.webp)
 
-  - validate data if the user not input y or n
+- Validate data if the user not input y or n
 
  ![continue laying](readme-files/continue_playing.webp)
 
@@ -69,7 +69,7 @@ User will guess the location of computer ships using input with validate data.
 
 ### Unfixed Bugs
 
-- See the Validator Testing paragraph above for JavaScript by JSHint.
+- All fixed.
 
 ### Fixed Bugs
 
