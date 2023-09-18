@@ -1,4 +1,3 @@
-from art import logo
 from random import randint
 # Constant variables
 size = 5
@@ -46,8 +45,8 @@ def user_guess():
     """
     while True:
         # Variables allow user to guess the row and col in computer board.
-        row_guess = input("Guess Row? <number within board size (0-4)> \n")
-        col_guess = input("Guess col? <number within board size (0-4)> \n")
+        row_guess = input("Guess Row? <number within board size (0-4)>\n")
+        col_guess = input("Guess col? <number within board size (0-4)>\n")
         if validate_data(row_guess, col_guess):
             player_turn(row_guess, col_guess)
             break
@@ -148,7 +147,7 @@ def continue_game(rounds):
                     print("Thanks for playing.")
                     return False
                 else:
-                    print("Please answer by y or n.")
+                    print("Please answer by y or n.\n")
             else:
                 print("*" * 30)
                 print(f"Game reached the last round: ({max_round})")
@@ -170,7 +169,6 @@ def play_game():
     ships randomly for both.
     """
     # Logo; wavy by Brian Krog.
-    print(logo)
     print("*" * 40)
     print("Welcome to the battleships game")
     print(f"Board size: {size}, number of ship: {num_ships}")
