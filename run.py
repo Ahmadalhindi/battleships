@@ -3,7 +3,7 @@ from random import randint
 size = 5
 num_ships = 5
 rounds = 0
-max_round = 5  # Here you can adjust the max round.
+max_round = 7  # Here you can adjust the max round.
 player_hit = []
 computer_hit = []
 # Variables for boards.
