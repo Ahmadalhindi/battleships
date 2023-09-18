@@ -6,6 +6,7 @@ The user will play against the computer, and each have their ships that sailing 
 The user tries to hit the computer ships before the computer is willing to do the same against the user.
 
 Please click here to visit the project.
+[Please click here to visit the project](https://battle-ships-app-e787139e7b7e.herokuapp.com/)
 
 
 ![amiresponsive](readme-files/amiresponsive.webp)
@@ -43,15 +44,20 @@ User will guess the location of computer ships using input with validate data.
 
 - Game rounds: 
 
+  - The game will loop in 7 rounds and after the max round the result is declared on who is the winner.
+
+  - The max round can be adjusted in the code.
+
   - During each round: the user and computer will play, and their boards are displayed to indicate if each player hit or missed their target. Followed by the round scores and the total scores.
 
-  - In the end of each round: an input request if the user wants to continue playing:
+  - In the end of each round: an input request if the user wants to continue playing,
 
 ![result](readme-files/result.webp)
 
-The game will loop in 7 rounds and after the max round the result is declared on who is the winner.
+  - validate data if the user not input y or n
 
-The max round can be adjusted in the code.
+ ![continue laying](readme-files/continue_playing.webp)
+
 
 ## Testing
 
