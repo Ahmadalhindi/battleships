@@ -1,32 +1,83 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Battleships
 
-Welcome,
+Battleships is a python terminal game, which runs in the Code Institute mock terminal on Heroku.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+The user will play against the computer, and each have their ships that sailing in their boards.
+The user tries to hit the computer ships before the computer is willing to do the same against the user.
 
-## Reminders
+Please click here to visit the project.
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
 
-## Creating the Heroku app
+![amiresponsive](readme-files/amiresponsive.webp)
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## How to play 
 
-1. `heroku/python`
-2. `heroku/nodejs`
+Short instructions appear at the top of the game when start playing.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+![start game](readme-files/start-game.webp)
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+- symbols used in boards: 
 
-Connect your GitHub repository and deploy as normal.
+  - < >  : User ship
+  -  x   : missed a ship
+  - < x > : Hit a ship
+  
 
-## Constraints
+Ships will add randomly to each player, but the user can’t see the computer ships.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+Computer will guess the location of user ships randomly and play again if guess the same.
 
----
+![play and score](readme-files/play-and-score.webp)
 
-Happy coding!
+- Validate data: 
+
+  - The number is out the limit of the board size (0-4).
+  - Invalid input, please enter a numerical value.
+  - You already guessed this. Try again.
+
+User will guess the location of computer ships using input with validate data.
+
+
+![validate_data](readme-files/validate_data.webp)
+
+
+- Game rounds: 
+
+  - During each round: the user and computer will play, and their boards are displayed to indicate if each player hit or missed their target. Followed by the round scores and the total scores.
+
+  - In the end of each round: an input request if the user wants to continue playing:
+
+![result](readme-files/result.webp)
+
+The game will loop in 7 rounds and after the max round the result is declared on who is the winner.
+
+The max round can be adjusted in the code.
+
+## Testing
+
+### Validator Testing
+
+- pep8 linter
+
+  - Passed with no errors find.
+
+### Unfixed Bugs
+
+- See the Validator Testing paragraph above for JavaScript by JSHint.
+
+### Fixed Bugs
+
+- Add another loop for continue the game inside the main loop of the game rouns, to fix the stop game bug.
+
+- Unfortunately,I couldn’t add imported logo to the project as it may collapse when deploying the project on Heroku.
+
+## Deployment
+This project was deployed using Code Inistitute's mock terminal for Heroku.
+
+- Deployment steps: 
+
+  - Fork or clone this repository
+  - Create a new Heroku app.
+  - Set the buildbacks to Python and NodeJs.
+  - Link the heroku app to repository.
+  - Click on deploy.

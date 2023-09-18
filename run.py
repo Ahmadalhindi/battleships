@@ -63,7 +63,7 @@ def validate_data(row_guess, col_guess):
             print(f"The number is out the limit of the board size(0-4)\n")
             return False
     except ValueError:
-        print("Invalid input, please enter a numerical values.\n")
+        print("Invalid input, please enter a numerical value.\n")
         return False
     return True
 
@@ -90,7 +90,7 @@ def player_turn(row_guess, col_guess):
         computer_board[int(row_guess)][int(col_guess)] = "[ x ]"
         print(f"You guessed: ({row_guess},{col_guess}), and missed")
     else:
-        print(f"You already guessed ({row_guess}, {col_guess}). Plz try again")
+        print(f"You already guessed ({row_guess}, {col_guess}). Try again")
         user_guess()
     computer_turn()
 
@@ -119,7 +119,6 @@ def computer_turn():
         player_board[comp_row_guess][comp_col_guess] = "[ x ]"
         print(f"Computer guessed:({comp_row_guess},{comp_col_guess}) & missed")
     else:
-        print("agaaaaaaaaaaaaain")
         computer_turn()
 
 
