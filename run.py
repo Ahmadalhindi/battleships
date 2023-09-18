@@ -45,8 +45,8 @@ def user_guess():
     """
     while True:
         # Variables allow user to guess the row and col in computer board.
-        row_guess = input("Guess Row? <number within board size (0-4)>\n")
-        col_guess = input("Guess col? <number within board size (0-4)>\n")
+        row_guess = input("Guess Row?(number between 0-4)\n")
+        col_guess = input("Guess col?(number between 0-4)\n")
         if validate_data(row_guess, col_guess):
             player_turn(row_guess, col_guess)
             break
@@ -59,8 +59,8 @@ def validate_data(row_guess, col_guess):
     the board size.
     """
     try:
-        if int(row_guess) > size or int(col_guess) > size:
-            print(f"The number is out the limit of the board size {size}\n")
+        if int(row_guess) > size-1 or int(col_guess) > size-1:
+            print(f"The number is out the limit of the board size(0-4)\n")
             return False
     except ValueError:
         print("Invalid input, please enter a numerical values.\n")
@@ -84,11 +84,11 @@ def player_turn(row_guess, col_guess):
         print(f"You guessed: ({row_guess}, {col_guess}), and hit")
         player_hit.append(1)
         player_score = sum(player_hit)
-        print(f"Your score for this round is: ({player_hit[0]})")
-        print(f"Your total score is: ({player_score})")
+        print(f"Your score now: ({player_hit[0]})")
+        print(f"Your total score: ({player_score})")
     elif computer_board[int(row_guess)][int(col_guess)] == "[   ]":
         computer_board[int(row_guess)][int(col_guess)] = "[ x ]"
-        print(f"You guessed: ({row_guess}, {col_guess}), and missed")
+        print(f"You guessed: ({row_guess},{col_guess}), and missed")
     else:
         print(f"You already guessed ({row_guess}, {col_guess}). Plz try again")
         user_guess()
@@ -113,12 +113,13 @@ def computer_turn():
         print(f"Computer guessed: ({comp_row_guess},{comp_col_guess}) & hit")
         computer_hit.append(1)
         computer_score = sum(computer_hit)
-        print(f"Computer score for this round is: ({computer_hit[0]})")
-        print(f"Computer total score is: ({computer_score})")
+        print(f"Computer score now: ({computer_hit[0]})")
+        print(f"Computer total score: ({computer_score})")
     elif player_board[comp_row_guess][comp_col_guess] == "[   ]":
         player_board[comp_row_guess][comp_col_guess] = "[ x ]"
         print(f"Computer guessed:({comp_row_guess},{comp_col_guess}) & missed")
     else:
+        print("agaaaaaaaaaaaaain")
         computer_turn()
 
 
@@ -129,7 +130,7 @@ def continue_game(rounds):
     """
     while True:
         rounds += 1
-        print(f"Round ({rounds})")
+        print(f"           Round ({rounds})")
         user_guess()
         print("")
         print("Computer board:")
@@ -169,12 +170,13 @@ def play_game():
     ships randomly for both.
     """
     # Logo; wavy by Brian Krog.
-    print("*" * 40)
-    print("Welcome to the battleships game")
-    print(f"Board size: {size}, number of ship: {num_ships}")
-    print(f"Rounds number: {max_round}, result on last round")
-    print("Hit a ship: [<x>], missed a ship: [ x ]")
-    print("*" * 40)
+    print("*" * 30)
+    print("  Welcome to Battleships game")
+    print(f"Board size: {size}, ships number: {num_ships}")
+    print(f"         Max round: {max_round}")
+    print("   Result on the last round")
+    print("    Hit: [<x>], miss: [ x ]")
+    print("*" * 30)
     add_ships(player_board, computer_board)
     print("Computer board:")
     print_board(computer_board)
